@@ -28,7 +28,7 @@ class Customer:
             Returns:
                 the statement as a String
         """
-        total_amount = 0 # total charges
+        total_amount = 0  # total charges
         frequent_renter_points = 0 
         statement = f"Rental Report for {self.name}\n\n"
         fmt = "{:32s}    {:4s} {:6s}\n"
@@ -36,13 +36,10 @@ class Customer:
         fmt = "{:32s}   {:4d} {:6.2f}\n"
         
         for rental in self.rentals:
-            # compute rental change
+            # compute rental change by using variable instead of calling the method 2 times.
             amount = rental.get_price()
             # award renter points
-            if rental.get_movie().get_price_code() == Movie.NEW_RELEASE:
-                frequent_renter_points += rental.get_days_rented()
-            else:
-                frequent_renter_points += 1
+            frequent_renter_points += rental.get_rental_points()
             #  add detail line to statement
             statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), amount)
             # and accumulate activity
