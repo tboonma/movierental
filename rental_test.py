@@ -17,6 +17,11 @@ class RentalTest(unittest.TestCase):
 		self.assertEqual("CitizenFour", str(m))
 		self.assertEqual(PriceCode.normal, m.get_price_code())
 
+	def test_invalid_price_code(self):
+		"""test to catch an Exception for invalid price_code."""
+		with self.assertRaises(TypeError):
+			Movie("The avengers", 2)
+
 	def test_rental_price(self):
 		# tests for new movies
 		rental = Rental(self.new_movie, 1)
