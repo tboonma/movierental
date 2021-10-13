@@ -39,7 +39,7 @@ class Customer:
             # compute rental change by using variable instead of calling the method 2 times.
             amount = rental.get_price()
             # award renter points
-            frequent_renter_points += rental.get_rental_points()
+            frequent_renter_points += rental.get_renter_points()
             #  add detail line to statement
             statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), amount)
             # and accumulate activity
