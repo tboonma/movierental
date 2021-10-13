@@ -41,7 +41,7 @@ class Customer:
             # award renter points
             frequent_renter_points += rental.get_renter_points()
             #  add detail line to statement
-            statement += fmt.format(rental.get_movie().get_title(), rental.get_days_rented(), amount)
+            statement += fmt.format(str(rental.get_movie()), rental.get_days_rented(), amount)
             # and accumulate activity
             total_amount += amount
 
