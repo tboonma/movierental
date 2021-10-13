@@ -18,9 +18,6 @@ class Customer:
         if rental not in self.rentals:
             self.rentals.append(rental)
     
-    def get_name(self):
-        return self.name
-    
     def statement(self):
         """
             Print all the rentals in current period, 
