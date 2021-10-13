@@ -17,14 +17,34 @@ class RentalTest(unittest.TestCase):
 		self.assertEqual("CitizenFour", m.get_title())
 		self.assertEqual(Movie.REGULAR, m.get_price_code())
 
-	@unittest.skip("TODO add this test when you refactor rental price")
 	def test_rental_price(self):
+		# tests for new movies
 		rental = Rental(self.new_movie, 1)
 		self.assertEqual(rental.get_price(), 3.0)
 		rental = Rental(self.new_movie, 5)
-		self.assertEqual(rental.get_price(), 15.0)
-		self.fail("TODO add more tests for other movie categories")
 
-	@unittest.skip("TODO add test of frequent renter points when you add it to Rental")
+		# tests for regular movies
+		self.assertEqual(rental.get_price(), 15.0)
+		rental = Rental(self.regular_movie, 1)
+		self.assertEqual(rental.get_price(), 2.0)
+		rental = Rental(self.regular_movie, 2)
+		self.assertEqual(rental.get_price(), 2.0)
+		rental = Rental(self.regular_movie, 3)
+		self.assertEqual(rental.get_price(), 3.5)
+
+		# tests for children movies
+		rental = Rental(self.childrens_movie, 1)
+		self.assertEqual(rental.get_price(), 1.5)
+		rental = Rental(self.childrens_movie, 2)
+		self.assertEqual(rental.get_price(), 1.5)
+		rental = Rental(self.childrens_movie, 3)
+		self.assertEqual(rental.get_price(), 1.5)
+		rental = Rental(self.childrens_movie, 4)
+		self.assertEqual(rental.get_price(), 3.0)
+
+	# @unittest.skip("")
+	# TODO add test of frequent renter points when you add it to Rental
 	def test_rental_points(self):
-		self.fail("TODO add  test of frequent renter points")
+		# self.fail("")
+		# TODO add  test of frequent renter points
+		pass
