@@ -5,6 +5,7 @@ from movie import Movie, PriceCode
 from rental import Rental
 from customer import Customer
 
+
 def make_movies():
     movies = [
         Movie("The Irishman", PriceCode.new_release),

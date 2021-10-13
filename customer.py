@@ -17,28 +17,31 @@ class Customer:
     def add_rental(self, rental: Rental):
         if rental not in self.rentals:
             self.rentals.append(rental)
-    
+
     def statement(self):
         """
-            Print all the rentals in current period, 
+            Print all the rentals in current period,
             along with total charges and reward points.
             Returns:
                 the statement as a String
         """
         total_amount = 0  # total charges
-        frequent_renter_points = 0 
+        frequent_renter_points = 0
         statement = f"Rental Report for {self.name}\n\n"
         fmt = "{:32s}    {:4s} {:6s}\n"
         statement += fmt.format("Movie Title", "Days", "Price")
         fmt = "{:32s}   {:4d} {:6.2f}\n"
-        
+
         for rental in self.rentals:
-            # compute rental change by using variable instead of calling the method 2 times.
+            # compute rental change by using variable
+            # instead of calling the method 2 times.
             amount = rental.get_price()
             # award renter points
             frequent_renter_points += rental.get_renter_points()
             #  add detail line to statement
-            statement += fmt.format(str(rental.get_movie()), rental.get_days_rented(), amount)
+            statement += fmt.format(str(rental.get_movie()),
+                                    rental.get_days_rented(),
+                                    amount)
             # and accumulate activity
             total_amount += amount
 
@@ -46,7 +49,8 @@ class Customer:
         statement += "\n"
         statement += "{:32s} {:6s} {:6.2f}\n".format(
                        "Total Charges", "", total_amount)
-        statement += "Frequent Renter Points earned: {}\n".format(frequent_renter_points)
+        statement += "Frequent Renter Points earned: {}\n".format(
+            frequent_renter_points)
 
         return statement
 
