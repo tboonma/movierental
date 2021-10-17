@@ -54,6 +54,9 @@ class Customer:
 
         return statement
 
+    def __str__(self):
+        return self.name
+
 
 if __name__ == "__main__":
     customer = Customer("Edward Snowden")
