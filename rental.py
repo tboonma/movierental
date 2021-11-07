@@ -1,3 +1,6 @@
+from movie import Movie
+
+
 class Rental:
     """
     A rental of a movie by customer.
@@ -10,21 +13,19 @@ class Rental:
     field is used.
     """
 
-    def __init__(self, movie, days_rented):
+    def __init__(self, movie: Movie, days_rented: int):
         """Initialize a new movie rental object for
            a movie with known rental period (daysRented).
         """
-        self.movie = movie
-        self.days_rented = days_rented
+        self.movie: Movie = movie
+        self.days_rented: int = days_rented
 
-    def get_movie(self):
-        return self.movie
+    def get_charge(self) -> float:
+        return self.movie.get_price_code().price(self.days_rented)
 
-    def get_days_rented(self):
-        return self.days_rented
+    def get_rental_points(self) -> float:
+        return self.movie.get_price_code().\
+            frequent_rental_points(self.days_rented)
 
-    def get_price(self):
-        return self.get_movie().get_price(self.days_rented)
-
-    def get_renter_points(self):
-        return self.get_movie().get_renter_points(self.days_rented)
+    def get_title(self) -> str:
+        return self.movie.title

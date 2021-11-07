@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class PriceCode(Enum):
-    """An enumeration for different kinds of movies and their behavior"""
+    """An enumeration for different kinds of movies and their behavior."""
 
     new_release = {"price": lambda days: 3.0 * days,
                    "frp": lambda days: days
@@ -15,11 +15,11 @@ class PriceCode(Enum):
                  }
 
     def price(self, days: int) -> float:
-        "Return the rental price for a given number of days"""
+        "Return the rental price for a given number of days."""
         pricing = self.value["price"]  # the enum member's price formula
         return pricing(days)
 
-    def renter_points(self, days: int) -> int:
+    def frequent_rental_points(self, days: int) -> int:
         """Return the the rental points for a given number of days."""
         frp = self.value["frp"]  # the enum member's frp formula
         return frp(days)
@@ -35,15 +35,10 @@ class Movie:
         self.title = title
         self.price_code = price_code
 
-    def get_price_code(self):
-        # get the price code
-        return self.price_code
-
-    def get_price(self, days: int) -> float:
-        return self.get_price_code().price(days)
-
-    def get_renter_points(self, days: int) -> int:
-        return self.get_price_code().renter_points(days)
-
-    def __str__(self):
+    def get_title(self) -> str:
+        """Get title for this movie."""
         return self.title
+
+    def get_price_code(self) -> PriceCode:
+        """Get price code for this movie."""
+        return self.price_code

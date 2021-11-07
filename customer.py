@@ -11,39 +11,68 @@ class Customer:
     """
     def __init__(self, name: str):
         """ Initialize a new customer."""
-        self.name = name
-        self.rentals = []
+        self.name: str = name
+        self.rentals: list[Rental] = []
 
     def add_rental(self, rental: Rental):
+        """Add rental to this customer.
+
+        Args:
+            rental: the rental that customer ordered.
+        """
         if rental not in self.rentals:
             self.rentals.append(rental)
 
-    def statement(self):
+    def get_name(self) -> str:
+        """Get this customer's name.
+
+        Returns:
+            customer's name as a string.
         """
-            Print all the rentals in current period,
-            along with total charges and reward points.
-            Returns:
-                the statement as a String
+        return self.name
+
+    def compute_rental_points(self) -> int:
+        """Get total rental points for this customer purchase.
+
+        Returns:
+            total rental points as an integer.
         """
-        total_amount = 0  # total charges
-        frequent_renter_points = 0
+        rental_points = 0
+        for rental in self.rentals:
+            rental_points += rental.get_rental_points()
+        return rental_points
+
+    def compute_total_charge(self) -> float:
+        """Get total charge for this customer's purchase.
+
+        Returns:
+            total charge as a float.
+        """
+        amount = 0
+        for rental in self.rentals:
+            amount += rental.get_charge()
+        return amount
+
+    def statement(self) -> str:
+        """Print all the rentals in current period,
+        along with total charges and reward points.
+
+        Returns:
+            the statement as a string.
+        """
+        total_amount = self.compute_total_charge()
+        frequent_renter_points = self.compute_rental_points()
+
         statement = f"Rental Report for {self.name}\n\n"
         fmt = "{:32s}    {:4s} {:6s}\n"
         statement += fmt.format("Movie Title", "Days", "Price")
         fmt = "{:32s}   {:4d} {:6.2f}\n"
 
         for rental in self.rentals:
-            # compute rental change by using variable
-            # instead of calling the method 2 times.
-            amount = rental.get_price()
-            # award renter points
-            frequent_renter_points += rental.get_renter_points()
             #  add detail line to statement
-            statement += fmt.format(str(rental.get_movie()),
-                                    rental.get_days_rented(),
-                                    amount)
-            # and accumulate activity
-            total_amount += amount
+            statement += fmt.format(str(rental.get_title()),
+                                    rental.days_rented,
+                                    rental.get_charge())
 
         # footer: summary of charges
         statement += "\n"
